@@ -115,3 +115,45 @@ see how you worked, not just what you produced.
   externally.
 - If something in a contract seems genuinely ambiguous, it may well be. Record
   your reading and move on; do not spend the budget on it.
+
+
+---
+
+## Implementation Summary
+
+This solution uses a conservative, high-confidence invoice-auditing approach.
+
+Hospital 1 was used as the labelled development set. The final audit achieved **97.04% accuracy** across 913 labelled invoices.
+
+The strongest deterministic checks include:
+
+- Contract number validation
+- Duplicate invoice ID detection
+- Service-date validation
+- Line-total arithmetic validation
+- Invoice-total arithmetic validation
+- Duplicate service billing detection
+- Daily quantity cap detection where service matching was reliable
+
+The final `submission.csv` covers:
+
+- Hospital 4: 835 unique invoices
+- Hospital 5: 1,050 unique invoices
+- Total: 1,885 invoices
+- Flagged: 87 invoices
+
+Complex contract-pricing rules were handled conservatively when reliable service matching or full sequential pricing reconstruction could not be guaranteed.
+
+See `H1_EVALUATION.md` for development-set performance and `DECISION_LOG.md` for implementation decisions and trade-offs.
+
+## AI Assistance Disclosure
+
+AI assistance was used during development to support:
+
+- Contract-rule interpretation
+- Audit-rule design
+- Python implementation and debugging
+- Evaluation analysis
+- Documentation
+
+All generated logic and outputs were reviewed and executed against the provided project data. Final implementation decisions prioritized reproducible deterministic checks and avoided relying on uncertain AI-generated or fuzzy-matching conclusions.
