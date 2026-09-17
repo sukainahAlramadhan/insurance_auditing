@@ -53,3 +53,22 @@ The validated high-confidence approach was applied to Hospitals 4 and 5. Predict
 - Total flagged: 87
 
 Contract-pricing rules requiring uncertain service matching were intentionally treated conservatively.
+
+
+## Examples of Systematic Failure Types
+
+The following development-set examples illustrate recurring limitations of the approach:
+
+1. **Unknown service mapping — INV-H1-000036:**  
+   Free-text billing descriptions may not map reliably to a contracted service. This can prevent the system from determining whether the billed service and rate are valid.
+
+2. **Wrong unit basis — INV-H1-000211:**  
+   A service can be identified while still being billed using a unit basis that differs from the contract. The deterministic arithmetic checks alone cannot reliably detect this semantic mismatch.
+
+3. **Omitted premium — INV-H1-000236:**  
+   Some pricing errors require recognizing that a contractual threshold or condition was met and that a premium should therefore have been applied. Missing this condition can produce a false negative.
+
+4. **Exclusion-window violation — INV-H1-000211:**  
+   Exclusion rules require linking related contracted services for the same patient across dates. Uncertain free-text service mapping can cause these temporal contract violations to be missed.
+
+These examples motivated the conservative final strategy: deterministic rules were used with higher confidence, while complex pricing and semantic service-matching conclusions were treated cautiously.
