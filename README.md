@@ -157,3 +157,12 @@ AI assistance was used during development to support:
 - Documentation
 
 All generated logic and outputs were reviewed and executed against the provided project data. Final implementation decisions prioritized reproducible deterministic checks and avoided relying on uncertain AI-generated or fuzzy-matching conclusions.
+
+
+## Reproducing the Submission
+
+Install the pinned dependencies with: pip install -r requirements.txt
+
+Run the audit pipeline with: python audit.py
+
+This regenerates submission.csv for Hospitals 4 and 5.
